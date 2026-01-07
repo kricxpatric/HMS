@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Fees | HMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+<nav class="bg-white shadow p-4 flex justify-between">
+    <h1 class="text-xl font-bold">🏠 My Fees</h1>
+    <a href="{% url 'student_dashboard' %}" class="text-blue-500">Dashboard</a>
+</nav>
+<div class="p-6">
+    <table class="min-w-full bg-white rounded shadow">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border">Amount</th>
+                <th class="py-2 px-4 border">Status</th>
+                <th class="py-2 px-4 border">Date Paid</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for fee in fees %}
+            <tr class="text-center">
+                <td class="py-2 px-4 border">${{ fee.amount }}</td>
+                <td class="py-2 px-4 border">{{ 'Paid' if fee.paid else 'Pending' }}</td>
+                <td class="py-2 px-4 border">{{ fee.date_paid|default:"-" }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="py-2">No fees found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

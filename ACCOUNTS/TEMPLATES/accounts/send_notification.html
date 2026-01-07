@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Send Notification | HMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<div class="bg-white p-6 rounded shadow-md w-full max-w-lg">
+    <h2 class="text-xl font-bold mb-4 text-center">Send Notification</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <label class="block mb-2">Recipient Username:</label>
+        <input type="text" name="recipient" class="w-full p-2 border rounded mb-4" required>
+
+        <label class="block mb-2">Message:</label>
+        <textarea name="message" class="w-full p-2 border rounded mb-4" rows="4" required></textarea>
+
+        <button type="submit" class="w-full bg-purple-500 text-white py-2 rounded hover:opacity-90">Send</button>
+    </form>
+    <a href="{% url 'notifications_dashboard' %}" class="text-blue-500 mt-4 block text-center">Back</a>
+</div>
+</body>
+</html>

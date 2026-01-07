@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Management - STAY-SMART HMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-4 shadow-lg">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-bed text-2xl"></i>
+                <h1 class="text-xl font-bold">STAY-SMART HMS</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span>Welcome, TITaS Admin</span>
+                <a href="{% url 'admin_dashboard' %}" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded transition">Back to Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Room Management</h1>
+            <p class="text-gray-600 text-lg">Manage hostel rooms and allocations</p>
+        </div>
+
+        <!-- Room Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Room 1 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Room A-101</h3>
+                        <span class="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full font-semibold mt-1">AC DOUBLE</span>
+                    </div>
+                    <div class="bg-green-100 p-2 rounded-lg">
+                        <i class="fas fa-building text-green-600"></i>
+                    </div>
+                </div>
+                
+                <div class="space-y-3 mb-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Capacity:</span>
+                        <span class="font-semibold">2 student</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Occupied:</span>
+                        <span class="font-semibold">1 student</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Floor:</span>
+                        <span class="font-semibold">1st Floor</span>
+                    </div>
+                </div>
+
+                <div class="flex space-x-2">
+                    <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded-lg font-semibold transition duration-300 text-sm">
+                        View Details
+                    </button>
+                    <button class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg font-semibold transition duration-300 text-sm">
+                        Allocate
+                    </button>
+                </div>
+            </div>
+
+            <!-- Room 2 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Room A-202</h3>
+                        <span class="inline-block bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full font-semibold mt-1">AC TRIPLE</span>
+                    </div>
+                    <div class="bg-green-100 p-2 rounded-lg">
+                        <i class="fas fa-building text-green-600"></i>
+                    </div>
+                </div>
+                
+                <div class="space-y-3 mb-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Capacity:</span>
+                        <span class="font-semibold">3 students</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Occupied:</span>
+                        <span class="font-semibold">0 students</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Floor:</span>
+                        <span class="font-semibold">2nd Floor</span>
+                    </div>
+                </div>
+
+                <div class="flex space-x-2">
+                    <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded-lg font-semibold transition duration-300 text-sm">
+                        View Details
+                    </button>
+                    <button class="flex-1 bg-gray-400 text-white py-2 rounded-lg font-semibold text-sm cursor-not-allowed" disabled>
+                        Full
+                    </button>
+                </div>
+            </div>
+
+            <!-- Room 3 -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-900">Room B-201</h3>
+                        <span class="inline-block bg-orange-100 text-orange-800 text-xs px-2 py-1 rounded-full font-semibold mt-1">Non-AC TRIPLE</span>
+                    </div>
+                    <div class="bg-blue-100 p-2 rounded-lg">
+                        <i class="fas fa-building text-blue-600"></i>
+                    </div>
+                </div>
+                
+                <div class="space-y-3 mb-4">
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Capacity:</span>
+                        <span class="font-semibold">3 students</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Occupied:</span>
+                        <span class="font-semibold">2 students</span>
+                    </div>
+                    <div class="flex justify-between items-center">
+                        <span class="text-gray-600">Floor:</span>
+                        <span class="font-semibold">2nd Floor</span>
+                    </div>
+                </div>
+
+                <div class="flex space-x-2">
+                    <button class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-2 rounded-lg font-semibold transition duration-300 text-sm">
+                        View Details
+                    </button>
+                    <button class="flex-1 bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-lg font-semibold transition duration-300 text-sm">
+                        Allocate
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Room Statistics -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                <div class="text-3xl font-bold text-blue-600">10</div>
+                <div class="text-gray-600 mt-1">Total Rooms</div>
+            </div>
+            <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                <div class="text-3xl font-bold text-green-600">3</div>
+                <div class="text-gray-600 mt-1">Occupied Rooms</div>
+            </div>
+            <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                <div class="text-3xl font-bold text-purple-600">7</div>
+                <div class="text-gray-600 mt-1">Available Rooms</div>
+            </div>
+            <div class="bg-white rounded-2xl shadow-lg p-6 text-center">
+                <div class="text-3xl font-bold text-orange-600">30%</div>
+                <div class="text-gray-600 mt-1">Occupancy Rate</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

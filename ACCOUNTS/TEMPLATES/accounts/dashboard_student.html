@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - STAY-SMART HMS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .dashboard-container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .dashboard-title {
+            text-align: center;
+            color: #3a86ff;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+        }
+
+        .welcome-section {
+            background: linear-gradient(135deg, #3a86ff, #8338ec);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px 0;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 30px 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            border-top: 5px solid #3a86ff;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .dashboard-card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #3a86ff;
+        }
+
+        .dashboard-card h3 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .dashboard-card p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .badge {
+            background: #ff4757;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+
+        /* Card Colors */
+        .dashboard-card.notification { border-top-color: #3a86ff; }
+        .dashboard-card.emergency { border-top-color: #ff4757; }
+        .dashboard-card.complaint { border-top-color: #ffa502; }
+        .dashboard-card.fee { border-top-color: #2ed573; }
+        .dashboard-card.room { border-top-color: #3742fa; }
+        .dashboard-card.tasks { border-top-color: #ff6348; }
+
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <button class="logout-btn" onclick="logout()">
+        <i class="fas fa-sign-out-alt"></i> Logout
+    </button>
+
+    <div class="dashboard-container">
+        <h2 class="dashboard-title">🎓 Student Dashboard</h2>
+        
+        <div class="welcome-section">
+            <h3 id="welcome-message">Welcome, Student!</h3>
+            <p>Manage your hostel activities from here</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="dashboard-card notification">
+                <i class="fas fa-bell"></i>
+                <h3>Notifications</h3>
+                <p>Check your alerts</p>
+                <span class="badge">3 new</span>
+            </div>
+
+            <div class="dashboard-card emergency">
+                <i class="fas fa-exclamation-triangle"></i>
+                <h3>Emergency</h3>
+                <p>Trigger emergency alert</p>
+            </div>
+
+            <div class="dashboard-card complaint">
+                <i class="fas fa-comment-dots"></i>
+                <h3>Complaints</h3>
+                <p>Submit complaints</p>
+            </div>
+
+            <div class="dashboard-card fee">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>Fee Payment</h3>
+                <p>Pay hostel fees</p>
+            </div>
+
+            <div class="dashboard-card room">
+                <i class="fas fa-bed"></i>
+                <h3>My Room</h3>
+                <p>Room details</p>
+            </div>
+
+            <div class="dashboard-card tasks">
+                <i class="fas fa-tasks"></i>
+                <h3>Daily Tasks</h3>
+                <p>View tasks</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in and is a student
+        function checkAuth() {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                window.location.href = 'index.html';
+                return;
+            }
+            if (currentUser.role !== 'student') {
+                alert('Access denied! This is student dashboard.');
+                window.location.href = 'index.html';
+                return;
+            }
+            
+            // Update welcome message
+            document.getElementById('welcome-message').textContent = `Welcome, ${currentUser.fullName}!`;
+        }
+
+        function logout() {
+            localStorage.removeItem('currentUser');
+            window.location.href = 'index.html';
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', checkAuth);
+    </script>
+</body>
+</html>

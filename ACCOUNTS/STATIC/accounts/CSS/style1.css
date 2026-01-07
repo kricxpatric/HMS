@@ -1,0 +1,117 @@
+/* ---------- Base Styles ---------- */
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #f0f4f8;
+    margin: 0;
+    padding: 0;
+}
+
+.dashboard-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    text-align: center;
+    color: #1f2937;
+    margin-bottom: 2rem;
+}
+
+/* ---------- Dashboard Grid ---------- */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    padding: 0 15px;
+}
+
+/* ---------- Dashboard Cards ---------- */
+.dashboard-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    transition: all 0.4s ease;
+    overflow: hidden;
+}
+
+.dashboard-card h3 {
+    font-size: 1.5rem;
+    margin: 10px 0 5px;
+    font-weight: 600;
+    color: #111827;
+}
+
+.dashboard-card p {
+    font-size: 1rem;
+    color: #6b7280;
+}
+
+/* ---------- Card Icon ---------- */
+.card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    transition: transform 0.3s ease;
+}
+
+/* ---------- Hover Effects ---------- */
+.dashboard-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+}
+
+.dashboard-card:hover .card-icon {
+    transform: rotate(15deg) scale(1.2);
+}
+
+/* ---------- Card Colors ---------- */
+.dashboard-card.notification {
+    border-top: 6px solid #3b82f6; /* Blue */
+}
+
+.dashboard-card.emergency {
+    border-top: 6px solid #ef4444; /* Red */
+}
+
+.dashboard-card.complaint {
+    border-top: 6px solid #fbbf24; /* Yellow */
+}
+
+.dashboard-card.fee {
+    border-top: 6px solid #10b981; /* Green */
+}
+
+.dashboard-card.tasks {
+    border-top: 6px solid #6366f1; /* Indigo */
+}
+
+.dashboard-card.room {
+    border-top: 6px solid #8b5cf6; /* Purple */
+}
+
+/* ---------- Responsive Text ---------- */
+@media (max-width: 640px) {
+    .dashboard-title {
+        font-size: 1.8rem;
+    }
+
+    .dashboard-card h3 {
+        font-size: 1.3rem;
+    }
+
+    .dashboard-card p {
+        font-size: 0.95rem;
+    }
+}
+a {
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+a:hover {
+    color: #388e3c; /* Green hover for "Mark Resolved" */
+}

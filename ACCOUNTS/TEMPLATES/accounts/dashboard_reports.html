@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports Dashboard - STAY-SMART HMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .download-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .generate-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .chart-container {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            margin-bottom: 24px;
+        }
+        
+        .chart-placeholder {
+            background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+            border-radius: 12px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-4 shadow-lg">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-bed text-2xl"></i>
+                <h1 class="text-xl font-bold">STAY-SMART HMS</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span>Welcome, TITaS Admin</span>
+                <a href="{% url 'admin_dashboard' %}" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded transition cursor-pointer">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modern Reports Dashboard -->
+    <div class="container mx-auto p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Reports Dashboard</h1>
+            <p class="text-gray-600 text-lg">Comprehensive analytics and system insights</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Students Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Total Students</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">156</p>
+                        <p class="text-gray-600 text-sm">Currently Enrolled</p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-xl">
+                        <i class="fas fa-user-graduate text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-green-600 text-sm">
+                    <i class="fas fa-chart-line mr-2"></i>
+                    <span>12 new this month</span>
+                </div>
+            </div>
+
+            <!-- Total Rooms Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Total Rooms</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">45</p>
+                        <p class="text-gray-600 text-sm">Available Rooms</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-xl">
+                        <i class="fas fa-building text-green-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-blue-600 text-sm">
+                    <i class="fas fa-bed mr-2"></i>
+                    <span>86% occupancy rate</span>
+                </div>
+            </div>
+
+            <!-- Fees Collected Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-yellow-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Fees Collected</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">₹4.8L</p>
+                        <p class="text-gray-600 text-sm">This Academic Year</p>
+                    </div>
+                    <div class="bg-yellow-100 p-3 rounded-xl">
+                        <i class="fas fa-money-bill-wave text-yellow-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-green-600 text-sm">
+                    <i class="fas fa-wallet mr-2"></i>
+                    <span>94% collection rate</span>
+                </div>
+            </div>
+
+            <!-- Staff Members Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-purple-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Staff Members</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">24</p>
+                        <p class="text-gray-600 text-sm">Active Staff</p>
+                    </div>
+                    <div class="bg-purple-100 p-3 rounded-xl">
+                        <i class="fas fa-user-tie text-purple-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-green-600 text-sm">
+                    <i class="fas fa-user-check mr-2"></i>
+                    <span>All active</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Complaints Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-orange-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Complaints</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">42</p>
+                        <p class="text-gray-600 text-sm">8 pending resolution</p>
+                    </div>
+                    <div class="bg-orange-100 p-3 rounded-xl">
+                        <i class="fas fa-comments text-orange-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-orange-600 text-sm">
+                    <i class="fas fa-clock mr-2"></i>
+                    <span>76% resolution rate</span>
+                </div>
+            </div>
+
+            <!-- Emergencies Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-red-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Emergencies</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">5</p>
+                        <p class="text-gray-600 text-sm">2 pending response</p>
+                    </div>
+                    <div class="bg-red-100 p-3 rounded-xl">
+                        <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-red-600 text-sm">
+                    <i class="fas fa-bolt mr-2"></i>
+                    <span>Immediate attention needed</span>
+                </div>
+            </div>
+
+            <!-- Occupancy Rate Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-indigo-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Occupancy Rate</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">86%</p>
+                        <p class="text-gray-600 text-sm">Room Utilization</p>
+                    </div>
+                    <div class="bg-indigo-100 p-3 rounded-xl">
+                        <i class="fas fa-chart-pie text-indigo-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-green-600 text-sm">
+                    <i class="fas fa-tachometer-alt mr-2"></i>
+                    <span>Optimal utilization</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Management Modules -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Report Management</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Financial Reports -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-purple-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Financial Reports')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-purple-100 p-3 rounded-lg">
+                            <i class="fas fa-chart-line text-purple-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Financial Reports</h3>
+                            <p class="text-gray-600 text-sm mt-2">Fee collection analytics</p>
+                            <div class="text-purple-600 text-sm font-medium mt-2">Revenue insights</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Student Reports -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-blue-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Student Reports')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <i class="fas fa-users text-blue-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Student Reports</h3>
+                            <p class="text-gray-600 text-sm mt-2">Student demographics</p>
+                            <div class="text-blue-600 text-sm font-medium mt-2">Enrollment data</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Room Occupancy -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-green-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Room Occupancy Reports')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-green-100 p-3 rounded-lg">
+                            <i class="fas fa-bed text-green-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Room Occupancy</h3>
+                            <p class="text-gray-600 text-sm mt-2">Utilization analytics</p>
+                            <div class="text-green-600 text-sm font-medium mt-2">86% occupancy</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Complaint Analytics -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-orange-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Complaint Analytics')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-orange-100 p-3 rounded-lg">
+                            <i class="fas fa-chart-bar text-orange-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Complaint Analytics</h3>
+                            <p class="text-gray-600 text-sm mt-2">Resolution metrics</p>
+                            <div class="text-orange-600 text-sm font-medium mt-2">42 complaints</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Emergency Reports -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-red-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Emergency Reports')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-red-100 p-3 rounded-lg">
+                            <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Emergency Reports</h3>
+                            <p class="text-gray-600 text-sm mt-2">Response analytics</p>
+                            <div class="text-red-600 text-sm font-medium mt-2">5 emergencies</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Custom Reports -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-indigo-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Custom Reports')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-indigo-100 p-3 rounded-lg">
+                            <i class="fas fa-cog text-indigo-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Custom Reports</h3>
+                            <p class="text-gray-600 text-sm mt-2">Create custom reports</p>
+                            <div class="text-indigo-600 text-sm font-medium mt-2">Build analytics</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <!-- Financial Chart -->
+            <div class="chart-container">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold text-gray-900">Fee Collection Trend</h3>
+                    <button class="download-btn">
+                        <i class="fas fa-download"></i>Export
+                    </button>
+                </div>
+                <div class="chart-placeholder">
+                    <div class="text-center">
+                        <i class="fas fa-chart-line text-4xl mb-3 text-blue-500"></i>
+                        <p>Fee Collection Chart</p>
+                        <p class="text-sm mt-1">Monthly revenue visualization</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Occupancy Chart -->
+            <div class="chart-container">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-xl font-bold text-gray-900">Room Occupancy</h3>
+                    <button class="download-btn">
+                        <i class="fas fa-download"></i>Export
+                    </button>
+                </div>
+                <div class="chart-placeholder">
+                    <div class="text-center">
+                        <i class="fas fa-chart-pie text-4xl mb-3 text-green-500"></i>
+                        <p>Occupancy Rate Chart</p>
+                        <p class="text-sm mt-1">Room utilization analytics</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Quick Report Actions</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <button class="generate-btn">
+                    <i class="fas fa-file-pdf"></i>Monthly Report
+                </button>
+                <button class="generate-btn" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                    <i class="fas fa-file-excel"></i>Financial Summary
+                </button>
+                <button class="generate-btn" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
+                    <i class="fas fa-chart-bar"></i>Analytics Report
+                </button>
+                <button class="generate-btn" style="background: linear-gradient(135deg, #ef4444, #dc2626);">
+                    <i class="fas fa-print"></i>Print Summary
+                </button>
+            </div>
+        </div>
+
+        <!-- Recent Activity Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+            <!-- Recent Reports -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Recently Generated Reports</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <i class="fas fa-file-pdf text-blue-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-900">Monthly Financial Report</p>
+                            <p class="text-sm text-gray-600">October 2023 Summary</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-600">Today</p>
+                            <span class="inline-block w-3 h-3 bg-green-500 rounded-full mt-1"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                        <div class="bg-green-100 p-3 rounded-lg">
+                            <i class="fas fa-file-excel text-green-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-900">Student Enrollment Report</p>
+                            <p class="text-sm text-gray-600">Q3 2023 Analysis</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-600">2 days ago</p>
+                            <span class="inline-block w-3 h-3 bg-green-500 rounded-full mt-1"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Overview -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">System Overview</h2>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center p-4 bg-blue-50 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-user-graduate text-blue-600"></i>
+                            <span class="font-medium text-gray-900">Total Students</span>
+                        </div>
+                        <span class="text-xl font-bold text-blue-600">156</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-green-50 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-building text-green-600"></i>
+                            <span class="font-medium text-gray-900">Total Rooms</span>
+                        </div>
+                        <span class="text-xl font-bold text-green-600">45</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-yellow-50 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-money-bill-wave text-yellow-600"></i>
+                            <span class="font-medium text-gray-900">Fees Collected</span>
+                        </div>
+                        <span class="text-xl font-bold text-yellow-600">₹4.8L</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo function for modules
+        function showDemoAlert(moduleName) {
+            alert(`🚀 ${moduleName} module would open here!\n\nIn a real system, this would redirect to the ${moduleName} management page.`);
+        }
+        
+        // Generate report buttons functionality
+        document.querySelectorAll('.generate-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const reportType = this.textContent.trim();
+                alert(`Generating ${reportType}...\n\nReport would be downloaded in a real system.`);
+            });
+        });
+        
+        // Download buttons functionality
+        document.querySelectorAll('.download-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const chartTitle = this.closest('.chart-container').querySelector('h3').textContent;
+                alert(`Exporting ${chartTitle} as PDF...\n\nChart data would be exported in a real system.`);
+            });
+        });
+    </script>
+</body>
+</html>

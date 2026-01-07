@@ -1,0 +1,83 @@
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Page title */
+.page-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Table wrapper for horizontal scroll */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+/* Table styling */
+.fees-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table header */
+.fees-table thead tr {
+    background-color: #1976d2;
+    color: #fff;
+    text-align: left;
+}
+
+.fees-table th, 
+.fees-table td {
+    padding: 12px 15px;
+    text-align: center;
+}
+
+/* Table rows */
+.fees-table tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.2s;
+}
+
+.fees-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.fees-table tbody tr:hover {
+    background-color: #e3f2fd;
+}
+
+/* Paid/Not Paid styling */
+.fees-table td:nth-child(3) {
+    font-weight: bold;
+    color: #555;
+}
+.fees-table td:nth-child(3):contains("Yes") {
+    color: #4CAF50; /* Green for paid */
+}
+.fees-table td:nth-child(3):contains("No") {
+    color: #d32f2f; /* Red for not paid */
+}
+
+/* No fees row styling */
+.fees-table tbody tr td[colspan="4"] {
+    text-align: center;
+    font-style: italic;
+    color: #777;
+}
+a {
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+a:hover {
+    color: #388e3c; /* Green hover for "Mark Resolved" */
+}

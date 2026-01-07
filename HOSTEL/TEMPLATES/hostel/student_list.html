@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management - STAY-SMART HMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-4 shadow-lg">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-bed text-2xl"></i>
+                <h1 class="text-xl font-bold">STAY-SMART HMS</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span>Welcome, TITaS Admin</span>
+                <a href="{% url 'admin_dashboard' %}" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded transition">Back to Dashboard</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Student Management</h1>
+            <p class="text-gray-600 text-lg">Manage student registrations, profiles, and allocations</p>
+        </div>
+
+        <!-- Stats -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-500">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-600 text-sm">Total Students</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">{{ students.count }}</p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-xl">
+                        <i class="fas fa-users text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-500">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-600 text-sm">Active Students</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">{{ allocated_students_count }}</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-xl">
+                        <i class="fas fa-user-check text-green-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-purple-500">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-600 text-sm">Room Allocations</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">{{ allocated_students_count }}</p>
+                    </div>
+                    <div class="bg-purple-100 p-3 rounded-xl">
+                        <i class="fas fa-bed text-purple-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-orange-500">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-gray-600 text-sm">New This Month</p>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">{{ students.count }}</p>
+                    </div>
+                    <div class="bg-orange-100 p-3 rounded-xl">
+                        <i class="fas fa-calendar text-orange-600 text-xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Table -->
+        <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200">
+                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                    <div>
+                        <h2 class="text-xl font-bold text-gray-900">Student Directory</h2>
+                        <p class="text-gray-600 text-sm">{{ students.count }} students found ({{ allocated_students_count }} allocated, {{ unallocated_students_count }} unallocated)</p>
+                    </div>
+                    <div class="mt-4 lg:mt-0 flex space-x-3">
+                        <div class="relative">
+                            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                            <input type="text" placeholder="Search students..." class="pl-10 pr-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        </div>
+                        <select class="border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500">
+                            <option>All Status</option>
+                            <option>Active</option>
+                            <option>Inactive</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Student</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Room</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                        {% for student in students %}
+                        <tr class="hover:bg-gray-50 transition duration-150">
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <div class="bg-gradient-to-r from-purple-500 to-indigo-500 w-10 h-10 rounded-lg flex items-center justify-center text-white font-semibold text-lg">
+                                        {{ student.name|first|upper }}
+                                    </div>
+                                    <div class="ml-4">
+                                        <div class="text-sm font-medium text-gray-900">{{ student.name }}</div>
+                                        <div class="text-sm text-gray-500">@{{ student.name|lower|slugify }}</div>
+                                        <div class="text-xs text-gray-400">ID: {{ student.roll_no }}</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <div class="text-sm text-gray-900">{{ student.email }}</div>
+                                <div class="text-sm text-gray-500">{{ student.phone }}</div>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                {% if student.room %}
+                                    <div class="text-sm font-medium text-gray-900">{{ student.room.room_number }}</div>
+                                    <div class="text-sm text-gray-500">Floor: {{ student.room.floor }}</div>
+                                {% else %}
+                                    <a href="{% url 'allocate_room' %}" class="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium text-sm hover:underline">
+                                        <i class="fas fa-bed mr-1"></i>
+                                        Allocate Room
+                                    </a>
+                                {% endif %}
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {% if student.room %}bg-green-100 text-green-800{% else %}bg-yellow-100 text-yellow-800{% endif %}">
+                                    {% if student.room %}Active{% else %}Unallocated{% endif %}
+                                </span>
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                                <div class="flex space-x-2">
+                                    <a href="{% url 'edit_student' student.id %}" class="text-blue-600 hover:text-blue-900 transform hover:scale-110 transition duration-200">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <button class="text-green-600 hover:text-green-900 transform hover:scale-110 transition duration-200" onclick="viewStudent({{ student.id }})">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <a href="{% url 'delete_student' student.id %}" class="text-red-600 hover:text-red-900 transform hover:scale-110 transition duration-200" onclick="return confirm('Are you sure you want to delete {{ student.name }}?')">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                                No students found. <a href="{% url 'add_student' %}" class="text-purple-600 hover:underline">Add the first student</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="px-6 py-4 border-t border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="text-sm text-gray-700">
+                        Showing <span class="font-medium">1</span> to <span class="font-medium">{{ students.count }}</span> of <span class="font-medium">{{ students.count }}</span> students
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Previous</button>
+                        <button class="px-3 py-1 border border-purple-500 bg-purple-500 text-white rounded-lg text-sm font-medium">1</button>
+                        <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">2</button>
+                        <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">3</button>
+                        <button class="px-3 py-1 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50">Next</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <a href="{% url 'allocate_room' %}" class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-purple-500 hover:shadow-xl transition duration-300 group">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-purple-100 p-3 rounded-xl">
+                        <i class="fas fa-bed text-purple-600 text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-900 group-hover:text-purple-600">Allocate Room</h3>
+                        <p class="text-gray-600 text-sm">Assign students to available rooms</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 group-hover:text-purple-600"></i>
+                </div>
+            </a>
+
+            <a href="{% url 'add_student' %}" class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-500 hover:shadow-xl transition duration-300 group">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-green-100 p-3 rounded-xl">
+                        <i class="fas fa-user-plus text-green-600 text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-900 group-hover:text-green-600">Add New Student</h3>
+                        <p class="text-gray-600 text-sm">Register new student account</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400 group-hover:text-green-600"></i>
+                </div>
+            </a>
+
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-500">
+                <div class="flex items-center space-x-4">
+                    <div class="bg-blue-100 p-3 rounded-xl">
+                        <i class="fas fa-file-export text-blue-600 text-xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-900">Export Data</h3>
+                        <p class="text-gray-600 text-sm">Download student records</p>
+                    </div>
+                    <i class="fas fa-chevron-right text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function viewStudent(studentId) {
+            alert(`Viewing student details for ID: ${studentId}\n\nIn a real system, this would show detailed student information.`);
+        }
+
+        // Demo function for buttons without links
+        function showDemoAlert(action) {
+            alert(`🚀 ${action} action would be performed here!\n\nIn a real system, this would ${action.toLowerCase()}.`);
+        }
+
+        // Add click events to demo buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const demoButtons = document.querySelectorAll('button:not([href])');
+            demoButtons.forEach(button => {
+                if (button.innerHTML.includes('fa-eye') && !button.onclick) {
+                    button.addEventListener('click', () => showDemoAlert('View Student Details'));
+                } else if (button.innerHTML.includes('fa-trash') && !button.onclick) {
+                    button.addEventListener('click', () => showDemoAlert('Delete Student'));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

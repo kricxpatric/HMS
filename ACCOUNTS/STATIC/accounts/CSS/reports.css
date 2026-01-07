@@ -1,0 +1,74 @@
+/* General page styling */
+body {
+    background-color: #f4f6f8;
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+}
+
+.dashboard-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #111827;
+    text-align: center;
+}
+
+/* Grid layout */
+.reports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Cards */
+.report-card {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+}
+
+.report-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #374151;
+}
+
+.report-card p {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+/* Hover effect */
+.report-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Special cards */
+.complaints-card h3 {
+    color: #f59e0b; /* yellow */
+}
+
+.emergencies-card h3 {
+    color: #ef4444; /* red */
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .reports-grid {
+        grid-template-columns: 1fr;
+    }
+}
+a {
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+a:hover {
+    color: #388e3c; /* Green hover for "Mark Resolved" */
+}

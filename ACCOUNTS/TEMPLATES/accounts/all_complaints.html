@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints Dashboard - STAY-SMART HMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .status-badge {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-resolved {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .status-pending {
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        
+        .status-urgent {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fecaca;
+        }
+        
+        .resolve-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .resolve-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .view-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+        
+        .view-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-4 shadow-lg">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-bed text-2xl"></i>
+                <h1 class="text-xl font-bold">STAY-SMART HMS</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span>Welcome, TITaS Admin</span>
+                <a href="{% url 'admin_dashboard' %}" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded transition cursor-pointer">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modern Complaints Dashboard -->
+    <div class="container mx-auto p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Complaints Dashboard</h1>
+            <p class="text-gray-600 text-lg">Manage and resolve student complaints efficiently</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Complaints Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Total Complaints</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">42</p>
+                        <p class="text-gray-600 text-sm">All Time</p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-xl">
+                        <i class="fas fa-comment-dots text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-green-600 text-sm">
+                    <i class="fas fa-chart-line mr-2"></i>
+                    <span>8% increase this month</span>
+                </div>
+            </div>
+
+            <!-- Pending Complaints Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-yellow-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Pending</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">8</p>
+                        <p class="text-gray-600 text-sm">Awaiting Resolution</p>
+                    </div>
+                    <div class="bg-yellow-100 p-3 rounded-xl">
+                        <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-orange-600 text-sm">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    <span>Require attention</span>
+                </div>
+            </div>
+
+            <!-- Resolved Complaints Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Resolved</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">32</p>
+                        <p class="text-gray-600 text-sm">Completed</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-xl">
+                        <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-green-600 text-sm">
+                    <i class="fas fa-tachometer-alt mr-2"></i>
+                    <span>76% resolution rate</span>
+                </div>
+            </div>
+
+            <!-- Urgent Complaints Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-red-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Urgent</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">2</p>
+                        <p class="text-gray-600 text-sm">High Priority</p>
+                    </div>
+                    <div class="bg-red-100 p-3 rounded-xl">
+                        <i class="fas fa-exclamation-triangle text-red-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-red-600 text-sm">
+                    <i class="fas fa-bolt mr-2"></i>
+                    <span>Immediate action needed</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Management Modules -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Complaint Management</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- All Complaints -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-purple-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('All Complaints')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-purple-100 p-3 rounded-lg">
+                            <i class="fas fa-list text-purple-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">All Complaints</h3>
+                            <p class="text-gray-600 text-sm mt-2">View all complaints</p>
+                            <div class="text-purple-600 text-sm font-medium mt-2">42 total</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Pending Complaints -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-yellow-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Pending Complaints')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-yellow-100 p-3 rounded-lg">
+                            <i class="fas fa-clock text-yellow-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Pending</h3>
+                            <p class="text-gray-600 text-sm mt-2">Awaiting resolution</p>
+                            <div class="text-yellow-600 text-sm font-medium mt-2">8 pending</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Resolved Complaints -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-green-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Resolved Complaints')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-green-100 p-3 rounded-lg">
+                            <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Resolved</h3>
+                            <p class="text-gray-600 text-sm mt-2">Completed complaints</p>
+                            <div class="text-green-600 text-sm font-medium mt-2">32 resolved</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Complaint Categories -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-blue-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Complaint Categories')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <i class="fas fa-tags text-blue-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Categories</h3>
+                            <p class="text-gray-600 text-sm mt-2">Manage complaint types</p>
+                            <div class="text-blue-600 text-sm font-medium mt-2">View categories</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Reports & Analytics -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-indigo-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Complaint Reports')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-indigo-100 p-3 rounded-lg">
+                            <i class="fas fa-chart-bar text-indigo-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Reports</h3>
+                            <p class="text-gray-600 text-sm mt-2">Analytics & insights</p>
+                            <div class="text-indigo-600 text-sm font-medium mt-2">View reports</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Settings -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-red-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Complaint Settings')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-red-100 p-3 rounded-lg">
+                            <i class="fas fa-cog text-red-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Settings</h3>
+                            <p class="text-gray-600 text-sm mt-2">Configure complaint system</p>
+                            <div class="text-red-600 text-sm font-medium mt-2">System settings</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Complaints Table Section -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">All Complaints</h2>
+                <div class="flex space-x-4">
+                    <button class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition duration-300">
+                        <i class="fas fa-download mr-2"></i>Export
+                    </button>
+                    <button class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg transition duration-300">
+                        <i class="fas fa-plus mr-2"></i>Add Complaint
+                    </button>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gray-50 border-b">
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Student</th>
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Complaint</th>
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Date</th>
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Status</th>
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <!-- Complaint 1 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center">
+                                    <div class="bg-gradient-to-r from-purple-500 to-indigo-500 w-10 h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm mr-3">R</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Rahul Sharma</p>
+                                        <p class="text-sm text-gray-600">Room 201</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="font-semibold text-gray-900">AC not working properly</p>
+                                <p class="text-sm text-gray-600 mt-1">The AC in my room is making strange noises and not cooling effectively.</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="text-gray-900">15 Oct 2023</p>
+                                <p class="text-sm text-gray-600">14:30</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="status-badge status-pending">Pending</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <a href="#" class="resolve-btn mr-2">
+                                    <i class="fas fa-check mr-1"></i>Resolve
+                                </a>
+                                <a href="#" class="view-btn">
+                                    <i class="fas fa-eye mr-1"></i>View
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- Complaint 2 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center">
+                                    <div class="bg-gradient-to-r from-blue-500 to-cyan-500 w-10 h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm mr-3">P</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Priya Patel</p>
+                                        <p class="text-sm text-gray-600">Room 305</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="font-semibold text-gray-900">Water leakage in bathroom</p>
+                                <p class="text-sm text-gray-600 mt-1">Constant water leakage from the ceiling in bathroom, causing inconvenience.</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="text-gray-900">14 Oct 2023</p>
+                                <p class="text-sm text-gray-600">10:15</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="status-badge status-urgent">Urgent</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <a href="#" class="resolve-btn mr-2">
+                                    <i class="fas fa-check mr-1"></i>Resolve
+                                </a>
+                                <a href="#" class="view-btn">
+                                    <i class="fas fa-eye mr-1"></i>View
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- Complaint 3 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center">
+                                    <div class="bg-gradient-to-r from-green-500 to-emerald-500 w-10 h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm mr-3">A</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Amit Kumar</p>
+                                        <p class="text-sm text-gray-600">Room 102</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="font-semibold text-gray-900">WiFi connectivity issues</p>
+                                <p class="text-sm text-gray-600 mt-1">Intermittent WiFi connection in my room, affecting online classes.</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="text-gray-900">13 Oct 2023</p>
+                                <p class="text-sm text-gray-600">16:45</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="status-badge status-resolved">Resolved</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <a href="#" class="view-btn">
+                                    <i class="fas fa-eye mr-1"></i>View
+                                </a>
+                            </td>
+                        </tr>
+                        
+                        <!-- Complaint 4 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center">
+                                    <div class="bg-gradient-to-r from-orange-500 to-amber-500 w-10 h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm mr-3">S</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Sneha Reddy</p>
+                                        <p class="text-sm text-gray-600">Room 408</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="font-semibold text-gray-900">Furniture repair needed</p>
+                                <p class="text-sm text-gray-600 mt-1">Study table drawer is broken and needs replacement or repair.</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="text-gray-900">12 Oct 2023</p>
+                                <p class="text-sm text-gray-600">09:20</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="status-badge status-resolved">Resolved</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <a href="#" class="view-btn">
+                                    <i class="fas fa-eye mr-1"></i>View
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Recent Activity Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Recent Complaints -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Recent Complaints</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                        <div class="bg-yellow-100 p-3 rounded-lg">
+                            <i class="fas fa-clock text-yellow-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-900">Rahul Sharma</p>
+                            <p class="text-sm text-gray-600">AC not working properly</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-600">Today</p>
+                            <span class="inline-block w-3 h-3 bg-yellow-500 rounded-full mt-1"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                        <div class="bg-red-100 p-3 rounded-lg">
+                            <i class="fas fa-exclamation-triangle text-red-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-900">Priya Patel</p>
+                            <p class="text-sm text-gray-600">Water leakage in bathroom</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-600">Yesterday</p>
+                            <span class="inline-block w-3 h-3 bg-red-500 rounded-full mt-1"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Complaint Overview -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Complaint Overview</h2>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center p-4 bg-blue-50 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-comment-dots text-blue-600"></i>
+                            <span class="font-medium text-gray-900">Total Complaints</span>
+                        </div>
+                        <span class="text-xl font-bold text-blue-600">42</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-yellow-50 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-clock text-yellow-600"></i>
+                            <span class="font-medium text-gray-900">Pending</span>
+                        </div>
+                        <span class="text-xl font-bold text-yellow-600">8</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-green-50 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-green-600"></i>
+                            <span class="font-medium text-gray-900">Resolved</span>
+                        </div>
+                        <span class="text-xl font-bold text-green-600">32</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo function for modules
+        function showDemoAlert(moduleName) {
+            alert(`🚀 ${moduleName} module would open here!\n\nIn a real system, this would redirect to the ${moduleName} management page.`);
+        }
+        
+        // Resolve button functionality
+        document.querySelectorAll('.resolve-btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const studentName = this.closest('tr').querySelector('.font-semibold').textContent;
+                if (confirm(`Mark complaint from ${studentName} as resolved?`)) {
+                    const statusBadge = this.closest('tr').querySelector('.status-badge');
+                    statusBadge.className = 'status-badge status-resolved';
+                    statusBadge.textContent = 'Resolved';
+                    this.remove();
+                    alert(`Complaint from ${studentName} has been marked as resolved.`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

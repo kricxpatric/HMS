@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STAY-SMART HMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .logout-confirm {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-4 shadow-lg">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-bed text-2xl"></i>
+                <h1 class="text-xl font-bold">STAY-SMART HMS</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span>Welcome, TITaS Admin</span>
+                <button onclick="showLogoutConfirm()" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded transition cursor-pointer">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Logout Confirmation Modal -->
+    <div id="logoutConfirm" class="logout-confirm">
+        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md mx-4">
+            <div class="text-center mb-6">
+                <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-sign-out-alt text-yellow-600 text-2xl"></i>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">Confirm Logout</h3>
+                <p class="text-gray-600">Are you sure you want to logout from your account?</p>
+            </div>
+            <div class="flex space-x-4">
+                <button onclick="hideLogoutConfirm()" class="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 py-3 rounded-xl font-semibold transition duration-300">
+                    Cancel
+                </button>
+                <a href="{% url 'logout' %}" class="flex-1 bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-semibold transition duration-300 text-center">
+                    <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modern Admin Dashboard -->
+    <div class="container mx-auto p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Administration Dashboard</h1>
+            <p class="text-gray-600 text-lg">Complete Hostel Management System Overview</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Student Card -->
+            <a href="{% url 'student_list' %}" class="block transform hover:scale-105 transition duration-300">
+                <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-gray-500 text-sm font-semibold uppercase">Student Management</h3>
+                            <p class="text-3xl font-bold text-gray-900 mt-2">6
+                            </p>
+                            <p class="text-gray-600 text-sm">Total Students</p>
+                        </div>
+                        <div class="bg-blue-100 p-3 rounded-xl">
+                            <i class="fas fa-users text-blue-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-green-600 text-sm">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        <span></span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Staff Card -->
+            <a href="{% url 'staff_dashboard' %}" class="block transform hover:scale-105 transition duration-300">
+                <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-gray-500 text-sm font-semibold uppercase">Staff Management</h3>
+                            <p class="text-3xl font-bold text-gray-900 mt-2"></p>
+                            <p class="text-gray-600 text-sm">Staff Members</p>
+                        </div>
+                        <div class="bg-green-100 p-3 rounded-xl">
+                            <i class="fas fa-user-tie text-green-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-blue-600 text-sm">
+                        <i class="fas fa-user-check mr-2"></i>
+                        <span>All active</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Financial Card -->
+            <a href="{% url 'fees_dashboard' %}" class="block transform hover:scale-105 transition duration-300">
+                <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-yellow-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-gray-500 text-sm font-semibold uppercase">Financial Summary</h3>
+                            <p class="text-3xl font-bold text-gray-900 mt-2">₹15K</p>
+                            <p class="text-gray-600 text-sm">Fees Collected</p>
+                        </div>
+                        <div class="bg-yellow-100 p-3 rounded-xl">
+                            <i class="fas fa-money-bill-wave text-yellow-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-green-600 text-sm">
+                        <i class="fas fa-wallet mr-2"></i>
+                        <span>90% collection rate</span>
+                    </div>
+                </div>
+            </a>
+
+            <!-- Issues Card -->
+            <a href="{% url 'all_complaints' %}" class="block transform hover:scale-105 transition duration-300">
+                <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-red-500">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-gray-500 text-sm font-semibold uppercase">Issue Management</h3>
+                            <p class="text-3xl font-bold text-gray-900 mt-2">NULL</p>
+                            <p class="text-gray-600 text-sm">Pending Complaints</p>
+                        </div>
+                        <div class="bg-red-100 p-3 rounded-xl">
+                            <i class="fas fa-exclamation-circle text-red-600 text-xl"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center text-orange-600 text-sm">
+                        <i class="fas fa-clock mr-2"></i>
+                        <span>Require attention</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <!-- Management Modules - COMPLETE 6 MODULES -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Management Modules</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Student Management -->
+                <a href="{% url 'student_list' %}" class="block group">
+                    <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-purple-500 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-purple-100 p-3 rounded-lg">
+                                <i class="fas fa-user-graduate text-purple-600 text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900 text-lg group-hover:text-purple-600">Student Management</h3>
+                                <p class="text-gray-600 text-sm mt-2">Manage student profiles</p>
+                                <div class="text-purple-600 text-sm font-medium mt-2">ALL students</div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400 group-hover:text-purple-600"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Room Management -->
+                <a href="{% url 'room_list' %}" class="block group">
+                    <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-blue-500 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-blue-100 p-3 rounded-lg">
+                                <i class="fas fa-building text-blue-600 text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900 text-lg group-hover:text-blue-600">Room Management</h3>
+                                <p class="text-gray-600 text-sm mt-2">Manage hostel rooms</p>
+                                <div class="text-blue-600 text-sm font-medium mt-2">10 rooms</div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400 group-hover:text-blue-600"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Financial System -->
+                <a href="{% url 'fees_dashboard' %}" class="block group">
+                    <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-green-500 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-green-100 p-3 rounded-lg">
+                                <i class="fas fa-chart-line text-green-600 text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900 text-lg group-hover:text-green-600">Financial System</h3>
+                                <p class="text-gray-600 text-sm mt-2">Fee tracking & reports</p>
+                                <div class="text-green-600 text-sm font-medium mt-2">₹15K collected</div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400 group-hover:text-green-600"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Complaint System -->
+                <a href="{% url 'all_complaints' %}" class="block group">
+                    <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-orange-500 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-orange-100 p-3 rounded-lg">
+                                <i class="fas fa-comments text-orange-600 text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900 text-lg group-hover:text-orange-600">Complaint System</h3>
+                                <p class="text-gray-600 text-sm mt-2">Manage student complaints</p>
+                                <div class="text-orange-600 text-sm font-medium mt-2">NO pending</div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400 group-hover:text-orange-600"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Notification Management -->
+                <a href="{% url 'notifications_dashboard' %}" class="block group">
+                    <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-indigo-500 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-indigo-100 p-3 rounded-lg">
+                                <i class="fas fa-bullhorn text-indigo-600 text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900 text-lg group-hover:text-indigo-600">Notification Management</h3>
+                                <p class="text-gray-600 text-sm mt-2">Send announcements</p>
+                                <div class="text-indigo-600 text-sm font-medium mt-2">Broadcast messages</div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400 group-hover:text-indigo-600"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Reports & Analytics -->
+                <a href="{% url 'reports_dashboard' %}" class="block group">
+                    <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-red-500 hover:shadow-xl transition-all duration-300 group-hover:scale-105">
+                        <div class="flex items-center space-x-4">
+                            <div class="bg-red-100 p-3 rounded-lg">
+                                <i class="fas fa-chart-bar text-red-600 text-xl"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-900 text-lg group-hover:text-red-600">Reports & Analytics</h3>
+                                <p class="text-gray-600 text-sm mt-2">System performance</p>
+                                <div class="text-red-600 text-sm font-medium mt-2">View insights</div>
+                            </div>
+                            <i class="fas fa-chevron-right text-gray-400 group-hover:text-red-600"></i>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- Recent Activity Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Recent Students -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Recent Students</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer" onclick="window.location.href='{% url 'student_list' %}'">
+                        <div class="bg-gradient-to-r from-purple-500 to-indigo-500 w-12 h-12 rounded-lg flex items-center justify-center text-white font-semibold text-lg">R</div>
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-900">Robin Rex</p>
+                            <p class="text-sm text-gray-600">@robin-rex</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-600">Today</p>
+                            <span class="inline-block w-3 h-3 bg-green-500 rounded-full mt-1"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer" onclick="window.location.href='{% url 'student_list' %}'">
+                        <div class="bg-gradient-to-r from-blue-500 to-cyan-500 w-12 h-12 rounded-lg flex items-center justify-center text-white font-semibold text-lg">P</div>
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-900">SHERLOCK HOMES</p>
+                            <p class="text-sm text-gray-600">@sherlock-homes</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-600">2 days ago</p>
+                            <span class="inline-block w-3 h-3 bg-green-500 rounded-full mt-1"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Overview -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">System Overview</h2>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center p-4 bg-blue-50 rounded-lg cursor-pointer" onclick="window.location.href='{% url 'student_list' %}'">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-users text-blue-600"></i>
+                            <span class="font-medium text-gray-900">Total Users</span>
+                        </div>
+                        <span class="text-xl font-bold text-blue-600">100</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-green-50 rounded-lg cursor-pointer" onclick="window.location.href='{% url 'student_list' %}'">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-user-graduate text-green-600"></i>
+                            <span class="font-medium text-gray-900">Students</span>
+                        </div>
+                        <span class="text-xl font-bold text-green-600">6</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-purple-50 rounded-lg cursor-pointer" onclick="window.location.href='{% url 'staff_dashboard' %}'">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-user-tie text-purple-600"></i>
+                            <span class="font-medium text-gray-900">Staff</span>
+                        </div>
+                        <span class="text-xl font-bold text-purple-600"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showLogoutConfirm() {
+            document.getElementById('logoutConfirm').style.display = 'flex';
+        }
+        
+        function hideLogoutConfirm() {
+            document.getElementById('logoutConfirm').style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('logoutConfirm')) {
+                hideLogoutConfirm();
+            }
+        }
+
+        // Demo function for modules without URLs
+        function showDemoAlert(moduleName) {
+            alert(`🚀 ${moduleName} module would open here!\n\nIn a real system, this would redirect to the ${moduleName} management page.`);
+        }
+    </script>
+</body>
+</html>

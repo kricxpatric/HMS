@@ -1,0 +1,85 @@
+/* Container body */
+body {
+    background-color: #f9fafb;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding: 30px;
+}
+
+/* Page title */
+h2 {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #d32f2f; /* Tailored red for emergencies */
+}
+
+/* Table wrapper for responsive scroll */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+/* Table headers */
+thead tr {
+    background-color: #f44336; /* Red header */
+    color: #fff;
+    text-align: center;
+}
+
+th, td {
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+/* Table body rows */
+tbody tr:nth-child(even) {
+    background-color: #fef2f2; /* Light red tint for even rows */
+}
+
+tbody tr:hover {
+    background-color: #ffe5e5; /* Hover effect */
+    transition: background-color 0.2s;
+}
+
+/* Action links */
+a {
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+a:hover {
+    color: #388e3c; /* Green hover for "Mark Resolved" */
+}
+
+/* Status column styling */
+td:nth-child(3) {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+td:nth-child(3):contains("active") {
+    color: #d32f2f;
+}
+
+td:nth-child(3):contains("resolved") {
+    color: #388e3c;
+}
+
+/* Empty row styling */
+tbody tr td[colspan="5"] {
+    font-style: italic;
+    color: #777;
+    text-align: center;
+    padding: 15px;
+}

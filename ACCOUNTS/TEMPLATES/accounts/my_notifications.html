@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Notifications | HMS</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.0/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50 p-6">
+<h2 class="text-xl font-bold mb-4">My Notifications</h2>
+<table class="min-w-full bg-white rounded shadow">
+    <thead>
+        <tr class="text-center">
+            <th class="py-2 px-4 border">Message</th>
+            <th class="py-2 px-4 border">Date</th>
+            <th class="py-2 px-4 border">Read</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for n in notifications %}
+        <tr class="text-center">
+            <td class="py-2 px-4 border">{{ n.message }}</td>
+            <td class="py-2 px-4 border">{{ n.created_at }}</td>
+            <td class="py-2 px-4 border">{{ 'Yes' if n.read else 'No' }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="3" class="py-2">No notifications.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'student_dashboard' %}" class="text-blue-500 mt-4 block">Back to Dashboard</a>
+</body>
+</html>

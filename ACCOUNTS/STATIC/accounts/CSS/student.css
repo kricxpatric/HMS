@@ -1,0 +1,96 @@
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Page title */
+.page-title {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Add button */
+.btn-add {
+    display: inline-block;
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+.btn-add:hover {
+    background-color: #45a049;
+}
+
+/* Table wrapper for horizontal scroll */
+.table-wrapper {
+    overflow-x: auto;
+}
+
+/* Table styling */
+.students-table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Table header */
+.students-table thead tr {
+    background-color: #1976d2;
+    color: #fff;
+    text-align: left;
+}
+
+.students-table th, 
+.students-table td {
+    padding: 12px 15px;
+}
+
+/* Table rows */
+.students-table tbody tr {
+    border-bottom: 1px solid #ddd;
+    transition: background-color 0.2s;
+}
+
+.students-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.students-table tbody tr:hover {
+    background-color: #e3f2fd;
+}
+
+/* Action links */
+.action-edit {
+    color: #1976d2;
+    text-decoration: none;
+    margin-right: 8px;
+}
+.action-edit:hover {
+    text-decoration: underline;
+}
+
+.action-delete {
+    color: #d32f2f;
+    text-decoration: none;
+}
+.action-delete:hover {
+    text-decoration: underline;
+}
+a {
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+a:hover {
+    color: #388e3c; /* Green hover for "Mark Resolved" */
+}

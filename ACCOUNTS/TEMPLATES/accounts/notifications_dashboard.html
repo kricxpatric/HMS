@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications Dashboard - STAY-SMART HMS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .status-badge {
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .status-read {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #bbf7d0;
+        }
+        
+        .status-unread {
+            background-color: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fde68a;
+        }
+        
+        .send-btn {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .action-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-gradient-to-r from-purple-600 to-indigo-700 text-white p-4 shadow-lg">
+        <div class="flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fas fa-bed text-2xl"></i>
+                <h1 class="text-xl font-bold">STAY-SMART HMS</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <span>Welcome, TITaS Admin</span>
+                <a href="{% url 'admin_dashboard' %}" class="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded transition cursor-pointer">
+                    <i class="fas fa-arrow-left mr-2"></i>Back to Dashboard
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Modern Notifications Dashboard -->
+    <div class="container mx-auto p-6">
+        <!-- Header -->
+        <div class="mb-8">
+            <h1 class="text-4xl font-bold text-gray-900 mb-2">Notifications Dashboard</h1>
+            <p class="text-gray-600 text-lg">Manage and track all system notifications</p>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Total Notifications Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-blue-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Total Notifications</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">156</p>
+                        <p class="text-gray-600 text-sm">All Time</p>
+                    </div>
+                    <div class="bg-blue-100 p-3 rounded-xl">
+                        <i class="fas fa-bell text-blue-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-green-600 text-sm">
+                    <i class="fas fa-chart-line mr-2"></i>
+                    <span>15% increase this week</span>
+                </div>
+            </div>
+
+            <!-- Unread Notifications Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-yellow-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Unread</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">23</p>
+                        <p class="text-gray-600 text-sm">Pending Review</p>
+                    </div>
+                    <div class="bg-yellow-100 p-3 rounded-xl">
+                        <i class="fas fa-envelope text-yellow-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-orange-600 text-sm">
+                    <i class="fas fa-clock mr-2"></i>
+                    <span>Require attention</span>
+                </div>
+            </div>
+
+            <!-- Read Notifications Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-green-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Read</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">133</p>
+                        <p class="text-gray-600 text-sm">Completed</p>
+                    </div>
+                    <div class="bg-green-100 p-3 rounded-xl">
+                        <i class="fas fa-check-circle text-green-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-green-600 text-sm">
+                    <i class="fas fa-tachometer-alt mr-2"></i>
+                    <span>85% read rate</span>
+                </div>
+            </div>
+
+            <!-- Today's Notifications Card -->
+            <div class="bg-white rounded-2xl shadow-lg p-6 border-l-4 border-purple-500">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h3 class="text-gray-500 text-sm font-semibold uppercase">Today</h3>
+                        <p class="text-3xl font-bold text-gray-900 mt-2">12</p>
+                        <p class="text-gray-600 text-sm">New Notifications</p>
+                    </div>
+                    <div class="bg-purple-100 p-3 rounded-xl">
+                        <i class="fas fa-bullhorn text-purple-600 text-xl"></i>
+                    </div>
+                </div>
+                <div class="flex items-center text-purple-600 text-sm">
+                    <i class="fas fa-bolt mr-2"></i>
+                    <span>Active today</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Management Modules -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <h2 class="text-2xl font-bold text-gray-900 mb-6">Notification Management</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Send Notification -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-purple-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Send Notification')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-purple-100 p-3 rounded-lg">
+                            <i class="fas fa-paper-plane text-purple-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Send Notification</h3>
+                            <p class="text-gray-600 text-sm mt-2">Create & send alerts</p>
+                            <div class="text-purple-600 text-sm font-medium mt-2">Broadcast message</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- All Notifications -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-blue-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('All Notifications')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-blue-100 p-3 rounded-lg">
+                            <i class="fas fa-list text-blue-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">All Notifications</h3>
+                            <p class="text-gray-600 text-sm mt-2">View all messages</p>
+                            <div class="text-blue-600 text-sm font-medium mt-2">156 total</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Unread Notifications -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-yellow-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Unread Notifications')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-yellow-100 p-3 rounded-lg">
+                            <i class="fas fa-envelope text-yellow-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Unread</h3>
+                            <p class="text-gray-600 text-sm mt-2">Pending notifications</p>
+                            <div class="text-yellow-600 text-sm font-medium mt-2">23 unread</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Notification Templates -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-green-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Notification Templates')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-green-100 p-3 rounded-lg">
+                            <i class="fas fa-layer-group text-green-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Templates</h3>
+                            <p class="text-gray-600 text-sm mt-2">Message templates</p>
+                            <div class="text-green-600 text-sm font-medium mt-2">Manage templates</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-indigo-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Notification Settings')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-indigo-100 p-3 rounded-lg">
+                            <i class="fas fa-cog text-indigo-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Settings</h3>
+                            <p class="text-gray-600 text-sm mt-2">Configure system</p>
+                            <div class="text-indigo-600 text-sm font-medium mt-2">System settings</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+
+                <!-- Reports & Analytics -->
+                <div class="border-2 border-gray-200 rounded-xl p-6 hover:border-red-500 hover:shadow-xl transition-all duration-300 cursor-pointer" onclick="showDemoAlert('Notification Reports')">
+                    <div class="flex items-center space-x-4">
+                        <div class="bg-red-100 p-3 rounded-lg">
+                            <i class="fas fa-chart-bar text-red-600 text-xl"></i>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-gray-900 text-lg">Reports</h3>
+                            <p class="text-gray-600 text-sm mt-2">Analytics & insights</p>
+                            <div class="text-red-600 text-sm font-medium mt-2">View reports</div>
+                        </div>
+                        <i class="fas fa-chevron-right text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notifications Table Section -->
+        <div class="bg-white rounded-2xl shadow-lg p-8 mb-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-900">All Notifications</h2>
+                <div class="flex space-x-4">
+                    <button class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg transition duration-300">
+                        <i class="fas fa-download mr-2"></i>Export
+                    </button>
+                    <button class="send-btn" onclick="showDemoAlert('Send New Notification')">
+                        <i class="fas fa-paper-plane"></i>Send Notification
+                    </button>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gray-50 border-b">
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Recipient</th>
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Message</th>
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Date</th>
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Status</th>
+                            <th class="py-4 px-6 text-left text-sm font-semibold text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <!-- Notification 1 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center">
+                                    <div class="bg-gradient-to-r from-purple-500 to-indigo-500 w-10 h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm mr-3">R</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Rahul Sharma</p>
+                                        <p class="text-sm text-gray-600">Room 201</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="font-semibold text-gray-900">Fee Payment Reminder</p>
+                                <p class="text-sm text-gray-600 mt-1">Your semester fee payment is due on October 25, 2023. Please make the payment at the earliest.</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="text-gray-900">15 Oct 2023</p>
+                                <p class="text-sm text-gray-600">14:30</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="status-badge status-unread">Unread</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <button class="action-btn mr-2">
+                                    <i class="fas fa-eye"></i>View
+                                </button>
+                                <button class="action-btn" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                                    <i class="fas fa-edit"></i>Edit
+                                </button>
+                            </td>
+                        </tr>
+                        
+                        <!-- Notification 2 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center">
+                                    <div class="bg-gradient-to-r from-blue-500 to-cyan-500 w-10 h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm mr-3">P</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Priya Patel</p>
+                                        <p class="text-sm text-gray-600">Room 305</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="font-semibold text-gray-900">Maintenance Schedule</p>
+                                <p class="text-sm text-gray-600 mt-1">Scheduled maintenance in Block B on October 18, 2023 from 2 PM to 5 PM. Please plan accordingly.</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="text-gray-900">14 Oct 2023</p>
+                                <p class="text-sm text-gray-600">10:15</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="status-badge status-read">Read</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <button class="action-btn mr-2">
+                                    <i class="fas fa-eye"></i>View
+                                </button>
+                                <button class="action-btn" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                                    <i class="fas fa-edit"></i>Edit
+                                </button>
+                            </td>
+                        </tr>
+                        
+                        <!-- Notification 3 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center">
+                                    <div class="bg-gradient-to-r from-green-500 to-emerald-500 w-10 h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm mr-3">A</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">All Students</p>
+                                        <p class="text-sm text-gray-600">Broadcast</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="font-semibold text-gray-900">Hostel Rules Update</p>
+                                <p class="text-sm text-gray-600 mt-1">Important update to hostel rules effective from November 1, 2023. Please check the notice board for details.</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="text-gray-900">13 Oct 2023</p>
+                                <p class="text-sm text-gray-600">16:45</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="status-badge status-read">Read</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <button class="action-btn mr-2">
+                                    <i class="fas fa-eye"></i>View
+                                </button>
+                                <button class="action-btn" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                                    <i class="fas fa-edit"></i>Edit
+                                </button>
+                            </td>
+                        </tr>
+                        
+                        <!-- Notification 4 -->
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-4 px-6">
+                                <div class="flex items-center">
+                                    <div class="bg-gradient-to-r from-orange-500 to-amber-500 w-10 h-10 rounded-lg flex items-center justify-center text-white font-semibold text-sm mr-3">S</div>
+                                    <div>
+                                        <p class="font-semibold text-gray-900">Sneha Reddy</p>
+                                        <p class="text-sm text-gray-600">Room 408</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="font-semibold text-gray-900">Complaint Resolution</p>
+                                <p class="text-sm text-gray-600 mt-1">Your complaint regarding furniture repair has been resolved. Maintenance team has fixed the study table.</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <p class="text-gray-900">12 Oct 2023</p>
+                                <p class="text-sm text-gray-600">09:20</p>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="status-badge status-unread">Unread</span>
+                            </td>
+                            <td class="py-4 px-6">
+                                <button class="action-btn mr-2">
+                                    <i class="fas fa-eye"></i>View
+                                </button>
+                                <button class="action-btn" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed);">
+                                    <i class="fas fa-edit"></i>Edit
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Recent Activity Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Recent Notifications -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Recent Notifications</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                        <div class="bg-yellow-100 p-3 rounded-lg">
+                            <i class="fas fa-bell text-yellow-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-900">Rahul Sharma</p>
+                            <p class="text-sm text-gray-600">Fee Payment Reminder</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-600">Today</p>
+                            <span class="inline-block w-3 h-3 bg-yellow-500 rounded-full mt-1"></span>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 p-4 hover:bg-gray-50 rounded-lg transition-colors cursor-pointer">
+                        <div class="bg-green-100 p-3 rounded-lg">
+                            <i class="fas fa-check text-green-600"></i>
+                        </div>
+                        <div class="flex-1">
+                            <p class="font-semibold text-gray-900">All Students</p>
+                            <p class="text-sm text-gray-600">Hostel Rules Update</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-sm text-gray-600">2 days ago</p>
+                            <span class="inline-block w-3 h-3 bg-green-500 rounded-full mt-1"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Notification Overview -->
+            <div class="bg-white rounded-2xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">Notification Overview</h2>
+                <div class="space-y-4">
+                    <div class="flex justify-between items-center p-4 bg-blue-50 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-bell text-blue-600"></i>
+                            <span class="font-medium text-gray-900">Total Notifications</span>
+                        </div>
+                        <span class="text-xl font-bold text-blue-600">156</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-yellow-50 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-envelope text-yellow-600"></i>
+                            <span class="font-medium text-gray-900">Unread</span>
+                        </div>
+                        <span class="text-xl font-bold text-yellow-600">23</span>
+                    </div>
+                    <div class="flex justify-between items-center p-4 bg-green-50 rounded-lg">
+                        <div class="flex items-center space-x-3">
+                            <i class="fas fa-check-circle text-green-600"></i>
+                            <span class="font-medium text-gray-900">Read</span>
+                        </div>
+                        <span class="text-xl font-bold text-green-600">133</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Demo function for modules
+        function showDemoAlert(moduleName) {
+            alert(`🚀 ${moduleName} module would open here!\n\nIn a real system, this would redirect to the ${moduleName} management page.`);
+        }
+        
+        // Mark as read functionality
+        document.querySelectorAll('.action-btn').forEach(button => {
+            if (button.innerHTML.includes('fa-eye')) {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const statusBadge = row.querySelector('.status-badge');
+                    const recipientName = row.querySelector('.font-semibold').textContent;
+                    
+                    if (statusBadge.classList.contains('status-unread')) {
+                        statusBadge.className = 'status-badge status-read';
+                        statusBadge.textContent = 'Read';
+                        alert(`Marked notification for ${recipientName} as read.`);
+                    } else {
+                        alert(`Viewing notification for ${recipientName}`);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+

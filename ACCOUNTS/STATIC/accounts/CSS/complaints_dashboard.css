@@ -1,0 +1,90 @@
+/* General page styling */
+.dashboard-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: #1f2937; /* dark gray */
+}
+
+/* Table wrapper for responsive scroll */
+.table-wrapper {
+    overflow-x: auto;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Table styling */
+.complaints-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+    text-align: center;
+}
+
+.complaints-table thead tr {
+    background-color: #f3f4f6; /* light gray */
+    font-weight: 600;
+}
+
+.complaints-table th,
+.complaints-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid #d1d5db; /* gray border */
+}
+
+.complaints-table tbody tr:hover {
+    background-color: #f9fafb;
+    transition: 0.3s;
+}
+
+/* Status styles */
+.status {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    display: inline-block;
+}
+
+.status.pending {
+    color: #b45309; /* amber-700 */
+    background-color: #fef3c7; /* amber-100 */
+}
+
+.status.resolved {
+    color: #065f46; /* green-800 */
+    background-color: #d1fae5; /* green-100 */
+}
+
+/* Resolve button */
+.resolve-btn {
+    color: #065f46;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    background-color: #d1fae5; /* green-100 */
+    transition: all 0.2s;
+}
+
+.resolve-btn:hover {
+    background-color: #10b981; /* green-500 */
+    color: #fff;
+}
+
+/* No data row */
+.no-data {
+    text-align: center;
+    font-style: italic;
+    color: #6b7280; /* gray-500 */
+    padding: 1rem 0;
+}
+a {
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+a:hover {
+    color: #388e3c; /* Green hover for "Mark Resolved" */
+}
